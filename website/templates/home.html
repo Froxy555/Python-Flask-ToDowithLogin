@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+</form>
+
+<div class="mode-switch">
+  <input type="checkbox" class="checkbox" id="darkModeToggle">
+  <label for="darkModeToggle" class="label">
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon"></i>
+    <div class="ball"></div>
+  </label>
+</div>
+
+<script>
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  darkModeToggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode', darkModeToggle.checked);
+  });
+</script>
+<style>
+  /* Dark Mode Styles */
+  .dark-mode {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+
+  /* Rest of your existing styles */
+
+  /* Styles for the dark mode switch */
+  .mode-switch {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .checkbox {
+    display: none;
+  }
+
+  .label {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .ball {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: transform 0.2s;
+  }
+
+  .checkbox:checked + .label .ball {
+    transform: translateX(20px);
+  }
+
+  .fa-sun,
+  .fa-moon {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    font-size: 14px;
+    color: #fff;
+    transition: opacity 0.2s;
+  }
+
+  .checkbox:checked + .label .fa-moon {
+    opacity: 0;
+  }
+
+  .checkbox:checked + .label .fa-sun {
+    opacity: 1;
+  }
+</style>
+{% endblock %}
