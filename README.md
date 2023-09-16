@@ -1,12 +1,8 @@
-# Flask Web App Tutorial
+# Flask ToDo App - Tom Hevesi
 
 ## Setup & Installation
 
-Make sure you have the latest version of Python installed.
-
-```bash
-git clone <repo-url>
-```
+Download the latest version of Python: https://www.python.org/downloads/
 
 ```bash
 pip install -r requirements.txt
